@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking System Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .hotel-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        #results { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏨 Hotel Booking System</h1>
+        <p>Backend Status: <span id="status">Checking...</span></p>
+        
+        <h2>Test API Endpoints</h2>
+        <button class="btn" onclick="testHealth()">Test Health</button>
+        <button class="btn" onclick="testHotels()">Search Hotels</button>
+        <button class="btn" onclick="testRegister()">Test Registration</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                document.getElementById('status').textContent = data.status;
+                showResult('Health Check', data);
+            } catch (error) {
+                showResult('Health Check Error', error.message);
+            }
+        }
+        
+        async function testHotels() {
+            try {
+                const response = await fetch(`${API_BASE}/hotels/search`);
+                const data = await response.json();
+                showResult('Hotels Search', data);
+                
+                // Display hotels in a nice format
+                if (data.hotels) {
+                    const hotelsHtml = data.hotels.map(hotel => `
+                        <div class="hotel-card">
+                            <h3>${hotel.name}</h3>
+                            <p><strong>Location:</strong> ${hotel.city}, ${hotel.country}</p>
+                            <p><strong>Rating:</strong> ${hotel.starRating} stars</p>
+                            <p>${hotel.description}</p>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('results').innerHTML += `
+                        <h3>Available Hotels:</h3>
+                        ${hotelsHtml}
+                    `;
+                }
+            } catch (error) {
+                showResult('Hotels Search Error', error.message);
+            }
+        }
+        
+        async function testRegister() {
+            try {
+                const userData = {
+                    email: 'test@example.com',
+                    password: 'password123',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    phone: '+1234567890'
+                };
+                
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                showResult('Registration Test', data);
+            } catch (error) {
+                showResult('Registration Error', error.message);
+            }
+        }
+        
+        function showResult(title, data) {
+            const results = document.getElementById('results');
+            results.innerHTML += `
+                <h3>${title}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+                <hr>
+            `;
+        }
+        
+        // Test health on page load
+        testHealth();
+    </script>
+</body>
+</html>
