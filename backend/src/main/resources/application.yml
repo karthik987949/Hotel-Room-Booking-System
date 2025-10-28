@@ -56,7 +56,7 @@ cors:
 # Gemini AI Configuration
 gemini:
   api:
-    key: AIzaSyC8xJNvjvFF23-HarijS1zPMB4cDzqaxvQ
+    key: gemini api key
     url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
 
 logging:
