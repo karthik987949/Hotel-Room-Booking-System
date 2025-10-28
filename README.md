@@ -133,8 +133,10 @@ The application comes with pre-loaded sample data:
 
 ## 📷 Preview
 Include a screenshot of your project by replacing the placeholder above:
-![IceSpot Banner](pics.png)
-![IceSpot Banner](review.png)
+![IceSpot Banner](Home.png)
+![IceSpot Banner](Home1.png)
+![IceSpot Banner](user.png)
+![IceSpot Banner](Admin.png)
 
 ## Features Implemented
 
