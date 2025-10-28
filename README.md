@@ -171,3 +171,8 @@ Additional features that can be implemented:
 - Admin dashboard
 - Real payment gateway integration
 - Booking analytics and reporting
+
+
+## 👨‍💻 Author
+Developed by **[Sai Karthik](https://github.com/your-username](https://github.com/karthik987949))**  
+Contributions, issues, and feature requests are welcome!
