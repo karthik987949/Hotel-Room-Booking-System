@@ -129,7 +129,12 @@ The application comes with pre-loaded sample data:
 - Material-UI
 - React Router
 - Axios
-- Formik & Yup
+- Formik & Yup\
+
+## 📷 Preview
+Include a screenshot of your project by replacing the placeholder above:
+![IceSpot Banner](pics.png)
+![IceSpot Banner](review.png)
 
 ## Features Implemented
 
